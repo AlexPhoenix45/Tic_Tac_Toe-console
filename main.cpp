@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "console.h"
 #include <conio.h>
 #include "X.h"
@@ -17,7 +18,7 @@ bool GameMenu()
     gotoXY(consoleWidth/2-(11/2), 2);
     cout << "Tic-Tac-Toe";
 
-    int i;
+    int i = 0;
 
     gotoXY(consoleWidth/2-(7/2), 5);
     cout << "1. PLAY";
@@ -25,7 +26,7 @@ bool GameMenu()
     cout << "2. EXIT";
 
     while (i != 49 || i != 50)
-    if (kbhit())
+    if (_kbhit())
     {
         i = _getch();
         if (i == 49)
