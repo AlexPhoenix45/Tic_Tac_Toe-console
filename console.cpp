@@ -1,21 +1,22 @@
 #include <stdio.h>
 #include <conio.h>
 #include "console.h"
+#include <iostream>
 
 
-int inputKey()
+int inputKey(int &n)
 {
 	if (_kbhit())
 	{
-		int key = _getch();
+		n = _getch();
 
-		if (key == 224)	// special key
+		if (n == 224)	// special key
 		{
-			key = _getch();
-			return key + 1000;
+			n = _getch();
+			return n + 1000;
 		}
 
-		return key;
+		return n;
 	}
 	else
 	{
@@ -29,7 +30,7 @@ int inputKey()
 //-------------------------Screen-------------------------
 void clrscr()
 {
-	CONSOLE_SCREEN_BUFFER_INFO	csbiInfo;                  
+	CONSOLE_SCREEN_BUFFER_INFO	csbiInfo;
 	HANDLE	hConsoleOut;
 	COORD	Home = {0,0};
 	DWORD	dummy;
@@ -77,4 +78,22 @@ int whereY()
 void TextColor (int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , color);
+}
+
+void drawLine (int from, int to, int y, int ASCII_Code)
+{
+    for (int i = from; i <= to; i++)
+    {
+        gotoXY(i, y);
+        std::cout << (char)ASCII_Code;
+    }
+}
+
+void drawColumn (int from, int to, int x, int ASCII_Code)
+{
+    for (int i = from; i <= to; i++)
+    {
+        gotoXY(x, i);
+        std::cout << (char)ASCII_Code;
+    }
 }

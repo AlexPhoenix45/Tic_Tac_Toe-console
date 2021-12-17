@@ -37,7 +37,7 @@
 
 //--------------------------------------------------------
 
-int inputKey();
+int inputKey(int &n);
 
 //-------------------------Screen-------------------------
 void clrscr();
@@ -52,6 +52,11 @@ int whereX();
 int whereY();
 
 void TextColor (int color);
+
+void drawLine(int from, int to, int y, int ASCII_Code);
+
+void drawColumn(int from, int to, int x, int ASCII_Code);
+
 //end----------------------Screen----------------------end
 
 
