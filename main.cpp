@@ -5,6 +5,7 @@
 #include "O.h"
 #include <cstdio>
 #include <vector>
+#include <string>
 
 const short consoleWidth = 120;
 const short consoleHeight = 30;
@@ -20,7 +21,7 @@ bool GameMenu()
     gotoXY(consoleWidth/2-(11/2), 2);
     cout << "Tic-Tac-Toe";
 
-    int i;
+    int i = 0;
 
     gotoXY(consoleWidth/2-(7/2), 5);
     cout << "1. PLAY";
@@ -28,7 +29,7 @@ bool GameMenu()
     cout << "2. EXIT";
 
     while (i != 49 || i != 50)
-        if (kbhit())
+        if (_kbhit())
         {
             i = _getch();
             if (i == 49)
@@ -56,7 +57,7 @@ void ChoosePlayer(O &playerO, X &playerX)
     cout << "Choose your marker (Press x or o): ";
     while ((int)marker != 111 || (int)marker != 120)
     {
-        if (kbhit())
+        if (_kbhit())
         {
             marker = _getch();
             if ((int)marker == 111)
@@ -98,9 +99,9 @@ void ChoosePlayer(O &playerO, X &playerX)
     clrscr();
 }
 
-void Square()
+void Square(O &playerO)
 {
-    clrscr();
+//------------Ke bang----------------
     drawLine(0, 36, 0, 151);
     drawLine(0, 36, 4, 151);
     drawLine(0, 36, 8, 151);
@@ -109,6 +110,20 @@ void Square()
     drawColumn(0, 12, 12, 166);
     drawColumn(0, 12, 24, 166);
     drawColumn(0, 12, 36, 166);
+//-----------Ve so o moi o--------------
+    if (playerO.getGameIsPlay() == false)
+    {
+        gotoXY(6, 2); cout << 1;
+        gotoXY(18, 2); cout << 2;
+        gotoXY(30, 2); cout << 3;
+        gotoXY(6, 6); cout << 4;
+        gotoXY(18, 6); cout << 5;
+        gotoXY(30, 6); cout << 6;
+        gotoXY(6, 10); cout << 7;
+        gotoXY(18, 10); cout << 8;
+        gotoXY(30, 10); cout << 9;
+        playerO.setGameIsPlay(true);
+    }
 }
 
 void placeMarker(short Position, O playerO, X playerX, bool O)
@@ -240,6 +255,7 @@ short firstMovement(O &playerO, X &playerX, vector<int> &isOccupied)
         gotoXY(0, 14);
         cout << "Player " << playerO.getPlayerName() << " placed marker in Position " << c << "                                             ";
         isOccupied.push_back(c);
+        playerO.addPlaceHasGone(c);
         Sleep(2000);
     }
 
@@ -295,6 +311,7 @@ short firstMovement(O &playerO, X &playerX, vector<int> &isOccupied)
         gotoXY(0, 14);
         cout << "Player " << playerX.getPlayerName() << " placed marker in Position " << c << "                                                 ";
         isOccupied.push_back(c);
+        playerX.addPlaceHasGone(c);
         Sleep(2000);
     }
     return c;
@@ -357,6 +374,7 @@ short nextMovement(O &playerO, X &playerX, vector<int> &isOccupied)
         gotoXY(0, 14);
         cout << "Player " << playerO.getPlayerName() << " placed marker in Position " << c << "                                           ";
         isOccupied.push_back(c);
+        playerO.addPlaceHasGone(c);
         Sleep(2000);
     }
 
@@ -412,6 +430,7 @@ short nextMovement(O &playerO, X &playerX, vector<int> &isOccupied)
         gotoXY(0, 14);
         cout << "Player " << playerX.getPlayerName() << " placed marker in Position " << c << "                      ";
         isOccupied.push_back(c);
+        playerX.addPlaceHasGone(c);
         Sleep(2000);
     }
     return c;
@@ -425,6 +444,43 @@ bool ifOGoFirst (O playerO)
         return false;
 }
 
+void clearMarker(O playerO, X playerX)
+{
+    for (int i = 1; i <= 9; i++)
+    {
+        placeMarker(i, playerO, playerX, true);
+    }
+}
+
+bool ifWin(O playerO, X playerX)
+{
+    if (playerO.ifWin() == true)
+    {
+        gotoXY(0 ,14);
+        cout << "Player " << playerO.getPlayerName() << " has won!!!                                                    ";
+        return true;
+    }
+    else if (playerX.ifWin() == true)
+    {
+        gotoXY(0, 14);
+        cout << "Player " << playerX.getPlayerName() << " has won!!!                                                    ";
+        return true;
+    }
+    else return false;
+}
+
+bool ifDraw(O playerO, X playerX)
+{
+	if (isOccupied.size() == 10)
+	{
+		gotoXY(0, 14);
+		cout << "Draw!!																									";
+		return true;
+	}
+	else return false;
+}
+
+
 int main()
 {
     if (GameMenu() == false)            //Thoat Game neu nguoi choi chon EXIT
@@ -432,21 +488,35 @@ int main()
 
     ChoosePlayer(playerO, playerX);     //Nhap ten va chon quan
 
-
     while (true)
     {
         //Hien thi
 
-        Square();
+        Square(playerO);
 
         //Dieu khien
         placeMarker(firstMovement(playerO, playerX, isOccupied), playerO, playerX, ifOGoFirst(playerO));
+
+        if (ifWin(playerO, playerX) == true)
+            break;
+
+		if (ifDraw(playerO, playerX) == true)
+			break;
+
         placeMarker(nextMovement(playerO, playerX, isOccupied), playerO, playerX, !ifOGoFirst(playerO));
+
+        if (ifWin(playerO, playerX) == true)
+            break;
+
+		if (ifDraw(playerO, playerX) == true)
+			break;
 
         //Xu ly
 
 
         //Ket thuc
+
+
         Sleep(1000);
     }
 

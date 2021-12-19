@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -7,6 +8,8 @@ class O
 private:
     string playerName;
     bool goingFirst = false;
+    bool gameIsPlay = false;
+    vector<short> placeHasGone;
 public:
     O() {}
     O(string playerName) : playerName(playerName) {}
@@ -27,6 +30,20 @@ public:
     bool getIsGoingFirst()
     {
         return goingFirst;
+    }
+
+    void setGameIsPlay(bool gameIsPlay)
+    {
+        this->gameIsPlay = gameIsPlay;
+    }
+    bool getGameIsPlay()
+    {
+        return gameIsPlay;
+    }
+
+    void addPlaceHasGone(short i)
+    {
+        placeHasGone.push_back(i);
     }
 //-----------------------Position------------------------
     int getPosLine1_x()
@@ -98,6 +115,66 @@ public:
     {
         gotoXY(getPosColumn3_y(), getPosLine3_x());
         cout << "O";
+    }
+    bool ifWin()
+    {
+        if (true)
+        {
+            //3 hang ngang
+            if (count(placeHasGone.begin(), placeHasGone.end(), 49))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 50))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 51))
+                        return true;
+            }
+
+            else if (count(placeHasGone.begin(), placeHasGone.end(), 52))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 53))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 54))
+                        return true;
+            }
+            else if (count(placeHasGone.begin(), placeHasGone.end(), 55))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 56))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 57))
+                        return true;
+            }
+            //3 hang doc
+            if (count(placeHasGone.begin(), placeHasGone.end(), 49))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 52))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 55))
+                        return true;
+            }
+            else if (count(placeHasGone.begin(), placeHasGone.end(), 50))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 53))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 56))
+                        return true;
+            }
+            else if (count(placeHasGone.begin(), placeHasGone.end(), 51))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 54))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 57))
+                        return true;
+            }
+
+            //2 duong cheo
+            if (count(placeHasGone.begin(), placeHasGone.end(), 49))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 53))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 57))
+                        return true;
+            }
+            else if (count(placeHasGone.begin(), placeHasGone.end(), 51))
+            {
+                if (count(placeHasGone.begin(), placeHasGone.end(), 53))
+                    if (count(placeHasGone.begin(), placeHasGone.end(), 55))
+                        return true;
+            }
+        }
+        else return false;
     }
 };
 
