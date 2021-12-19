@@ -1,0 +1,12 @@
+﻿  main.cpp
+e:\c++\vs_2017\x_o\x_o\main.cpp(215): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(239): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(271): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(295): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(334): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(358): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(390): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\main.cpp(414): warning C4018: '<': signed/unsigned mismatch
+e:\c++\vs_2017\x_o\x_o\x.h(170): warning C4715: 'X::ifWin': not all control paths return a value
+e:\c++\vs_2017\x_o\x_o\o.h(178): warning C4715: 'O::ifWin': not all control paths return a value
+  X_O.vcxproj -> E:\C++\vs_2017\X_O\Debug\X_O.exe
